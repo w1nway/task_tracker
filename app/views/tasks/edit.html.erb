@@ -1,0 +1,9 @@
+<p id="notice" style="color: #730E15"><%= notice %></p>
+
+<%= link_to "Project", @task.project %>
+
+<h1>Editing Task</h1>
+
+<%= render 'form', task: @task, project: @task.project %>
+
+<%= link_to 'Back', project_tasks_path(@task.project) %>

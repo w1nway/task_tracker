@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Project</h1>
+
 <p>
   <strong>Name:</strong>
   <%= @project.name %>
@@ -10,5 +12,7 @@
   <%= @project.description %>
 </p>
 
+<%= link_to 'Tasks', project_tasks_path(@project) %> |
 <%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Projects', projects_path %>
+
