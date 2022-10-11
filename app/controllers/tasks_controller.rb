@@ -15,9 +15,9 @@ class TasksController < ApplicationController
     @task.deadline_at = 7.days.after
 
     if @task.save
-      redirect_to project_task_url(@project, @task), notice: 'Task was successfully created!'
+      redirect_to project_task_url(@project, @task), notice: "Task was successfully created!"
     else
-      flash.now[:notice] = 'Something went wrong. Try again.'
+      flash.now[:notice] = "Something went wrong. Try again."
       render :new
     end
   end
@@ -45,11 +45,11 @@ class TasksController < ApplicationController
   private
 
   def set_task
-    @task = Task.find_by!(id: params[:id])
+    @task = Task.find(params[:id])
   end
 
   def set_project
-    @project = Project.find_by!(id: params[:project_id])
+    @project = Project.find(params[:project_id])
   end
 
   def task_params
