@@ -11,11 +11,35 @@
   </head>
 
   <body>
+
     <% flash.each do |type, msg| %>
       <div class="flash-<%=type%>">
         <p><%=msg%></p>
       </div>
     <%end%>
+
+    <% if current_user.present? %>
+      <% flag = true %>
+      <h3>User Info:</h3>
+      <% if current_user.first_name.eql?("") && current_user.last_name.eql?("")%>
+        <p> Email: <%= "#{current_user.email}" %></p>
+      <% else %>
+        <p> First name: <%= "#{current_user.first_name}" %> | Last name: <%= "#{current_user.last_name}" %></p>
+      <% end %>
+    <% else %>
+      <% flag = false%>
+    <% end %>
+
     <%= yield %>
+
+    <% if !flag %>
+      <h4>Welcome guest! </h4>
+      <p>To use our application you must sign up or log in.</p>
+      <p><%= link_to "Sign Up", new_user_path %> | <%= link_to "Log in", new_sessions_path %></p>
+    <% else %>
+      <p><%= link_to "Log Out", sessions_path, method: :delete %></p>
+    <% end %>
+
+
   </body>
 </html>

@@ -21,6 +21,12 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session.delete(:current_user_id)
+
+    redirect_to root_path, notice: "You've successfully logged out!"
+  end
+
   private
 
   def user_params
