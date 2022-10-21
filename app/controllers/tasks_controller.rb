@@ -17,7 +17,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to project_tasks_url(@project, @task), notice: "Task was successfully created."
     else
-      flash.now[:notice] = "Task must have a name."
+      flash.now[:notice] = "Something went wrong. Try again."
       render :new
     end
   end
