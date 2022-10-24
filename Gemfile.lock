@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    action_policy (0.6.3)
+      ruby-next-core (>= 0.14.0)
     actioncable (6.1.7)
       actionpack (= 6.1.7)
       activesupport (= 6.1.7)
@@ -70,6 +72,8 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
+    enumerize (2.5.0)
+      activesupport (>= 3.2)
     erubi (1.11.0)
     ffi (1.15.5)
     globalid (1.0.0)
@@ -180,6 +184,7 @@ GEM
       rubocop (~> 1.0)
     rubocop-thread_safety (0.4.4)
       rubocop (>= 0.53.0)
+    ruby-next-core (0.15.3)
     ruby-progressbar (1.11.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -228,9 +233,11 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  action_policy
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
   byebug
+  enumerize
   kaminari
   listen (~> 3.3)
   pg (~> 1.1)
