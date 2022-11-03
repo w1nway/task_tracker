@@ -23,5 +23,14 @@
   <%= @task.created_at %>
 </p>
 
+<p>
+  <strong>Status:</strong>
+  <%= @task.status %>
+</p>
+
+
+<%= render(partial: 'comments/form', locals: { comment: @comment }) %>
+<%= render(partial: 'comments/index', locals: { comment: @comment}) %>
+
 <%= link_to 'Edit', edit_project_task_path(@task.project, @task) %> |
 <%= link_to 'Back', project_tasks_path(@task.project) %>

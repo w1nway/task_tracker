@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root to: "projects#index"
 
   resources :projects do
-    resources :tasks
+    resources :tasks do 
+      resources :comments, only: %i[create destroy update]
+    end
   end
 
   resources :users, only: %i[new create]
