@@ -1,4 +1,4 @@
-<%= form_with(model: comment, url: [project, task, comment]) do |form| %>
+<%= form_with(model: [project, task, task.comments.build]) do |form| %>
   <% if comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -19,3 +19,5 @@
   <%= form.submit "Add a comment" %>
 
 <% end %>
+
+<%# <%= form_with(model: comment, url: [project, task, comment]) do |form| %> 

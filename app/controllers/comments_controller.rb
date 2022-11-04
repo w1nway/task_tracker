@@ -1,28 +1,32 @@
 class CommentsController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
-  before_action :set_comment, only: %i[create destroy update]
+  before_action :set_comment, only: %i[edit destroy update]
+  before_action -> { authorize! @comment }, only: %i[edit destroy update]
+  before_action :authenticate_current_user!
 
   def new
     @comment = Comment.new
   end
 
   def create
-    # @task = Task.find(params[:task_id])
-    # @comment = @task.comments.create(comment_params)
-    @comment = Comment.new(comment_params)
+    @task = Task.find(params[:task_id])
+    @comment = @task.comments.create(comment_params)
+    @comment.user = current_user 
+
+    authorize! @comment
 
     if @comment.save
       redirect_to project_task_path(@project, @task), notice: "Comment was successfully created!"
     else
       flash.now[:notice] = "Something went wrong. Try again."
+      redirect_to project_task_path(@project, @task)
     end
   end
 
   def destroy
-    @task = @Task.find(params[:task_id])
-    @comment = Comment.find(params[:id])
+    @comment = @task.comments.find(params[:id]) 
+    # libo add @project.task
     @comment.destroy
-
     redirect_to project_task_url(@task.project, @task), notice: "Comment was successfully destroyed."
   end
 

@@ -30,8 +30,10 @@ class TasksController < ApplicationController
   end
 
   def show
+    @project = Project.find(params[:project_id])
     @comment = Comment.new
-    @comments = @task.comments
+    @comments = @task.comments.order(created_at: :desc)
+    
   end
 
   def edit

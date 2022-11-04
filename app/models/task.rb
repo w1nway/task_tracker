@@ -6,7 +6,7 @@ class Task < ApplicationRecord
   enumerize :status, in: STATUSES, scope: :shallow, predicates: true
 
   belongs_to :project
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   validates :title, presence: true
   validates :deadline_at, presence: true
