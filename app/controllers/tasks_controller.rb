@@ -1,21 +1,27 @@
 class TasksController < ApplicationController
+  before_action :authenticate_current_user!
   before_action :set_task, only: %i[show edit update destroy]
-  before_action :set_project, only: %i[new index create destroy]
+  before_action :set_project
+  before_action -> { authorize! @task }, only: %i[show edit update destroy]
 
   def index
+    @task = Task.new(project: @project)
+    authorize! @task
+
     @tasks = @project.tasks
   end
 
   def new
-    @task = Task.new
+    @task = Task.new(project: @project)
+    authorize! @task
   end
 
   def create
-    @task = Task.new(task_params)
-    @task.deadline_at = 7.days.after
+    @task = Task.new(task_params.merge({ project: @project }))
+    authorize! @task
 
     if @task.save
-      redirect_to project_task_url(@project, @task), notice: "Task was successfully created!"
+      redirect_to project_task_path(@project, @task), notice: "Task was successfully created!"
     else
       flash.now[:notice] = "Something went wrong. Try again."
       render :new
@@ -28,6 +34,8 @@ class TasksController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comments = @task.comments
   end
 
   def edit
@@ -35,7 +43,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to project_task_url(@task.project, @task), notice: "Task was successfully updated."
+      redirect_to project_task_path(@project, @task), notice: "Task was successfully updated."
     else
       flash.now[:notice] = "Something went wrong. Try again."
       render :edit
@@ -53,6 +61,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :deadline_at, :project_id)
+    params.require(:task).permit(:title, :description, :deadline_at)
   end
 end

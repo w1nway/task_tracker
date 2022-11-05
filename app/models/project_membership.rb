@@ -6,5 +6,5 @@ class ProjectMembership < ApplicationRecord
   belongs_to :project
   belongs_to :user
 
-  enumerize :role, in: ROLES
+  enumerize :role, in: ROLES, predicates: true
 end

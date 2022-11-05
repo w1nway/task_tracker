@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action -> { authorize! User }
+
   def new
     @user = User.new
   end

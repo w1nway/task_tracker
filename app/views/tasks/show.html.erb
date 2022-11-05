@@ -15,7 +15,7 @@
 
 <p>
   <strong>Project name:</strong>
-  <%= @task.project.name %>
+  <%= @project.name %>
 </p>
 
 <p>
@@ -23,5 +23,9 @@
   <%= @task.created_at %>
 </p>
 
-<%= link_to 'Edit', edit_project_task_path(@task.project, @task) %> |
-<%= link_to 'Back', project_tasks_path(@task.project) %>
+<%= link_to 'Edit', edit_project_task_path(@project, @task) %> |
+<%= link_to 'Back', project_tasks_path(@project) %>
+
+<%= render 'comments/form', comment: @comment, task: @task, project: @project %>
+
+<%= render 'comments/list', comments: @comments %>
