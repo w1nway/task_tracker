@@ -32,3 +32,5 @@ linters:
       - Style/TrailingWhitespace
       - Style/WhileUntilModifier
       - Style/NestedTernaryOperator
+      - Style/StringLiterals
+      - Style/QuotedSymbols
