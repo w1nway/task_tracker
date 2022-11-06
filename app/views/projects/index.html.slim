@@ -11,12 +11,11 @@ table.table
   tbody
     -@projects.each do |project|
       tr
-        td = project.name
-        td = project.description
+        td = link_to project.name, project
+        td = truncate(project.description, length: 80)
         td
           => time_ago_in_words(project.created_at)
           | ago
-        td = link_to 'Show', project
         td = link_to 'Edit', edit_project_path(project)
         td = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
         td = link_to 'Tasks', project_tasks_path(project)
@@ -25,4 +24,4 @@ table.table
 
 br
 
-= link_to 'New Project', new_project_path
+= link_to 'New Project', new_project_path, class: 'btn btn-primary'
