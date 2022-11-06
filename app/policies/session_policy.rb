@@ -10,6 +10,6 @@ class SessionPolicy < ApplicationPolicy
   end
 
   def create?
-    !user.present?
+    user.blank?
   end
 end

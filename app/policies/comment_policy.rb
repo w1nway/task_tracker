@@ -1,25 +1,23 @@
 class CommentPolicy < ApplicationPolicy
-  authorize :user, allow_nil: true
-
   def update?
-    is_a_member?
+    member?
   end
 
   def edit?
-    is_a_member?
+    member?
   end
 
   def create?
-    is_a_member?
+    member?
   end
 
   def destroy?
-    is_a_member?
+    member?
   end
 
   private 
 
-  def is_a_member?
+  def member?
     ProjectMembership.find_by(project: record.task.project, user: user).present?
   end
 
