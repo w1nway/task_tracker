@@ -28,13 +28,9 @@
   <%= @task.status %>
 </p>
 
-
-
+<h2>New Comment</h2>
 <%= render :partial => 'comments/form', :locals => {:comment => @comment, :task => @task, :project => @project } %>
-<% @comments.each do |comment| %>
-  <%= render :partial => 'comments/comment', :locals => {:comment => @comment, :task => @task, :project => @project } %>
-<% end %>
-<%# <%= render :partial => 'comments/list', :locals => {:comment => @comment, :task => @task, :project => @project, :user => @user } %> 
+<%= render :partial => 'comments/list', :locals => {:comment => @comment, :task => @task, :project => @project } %>
 
 <%= link_to 'Edit', edit_project_task_path(@task.project, @task) %> |
 <%= link_to 'Back', project_tasks_path(@task.project) %>

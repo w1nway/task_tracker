@@ -1,0 +1,4 @@
+<h1>Editing Comment</h1>
+
+<%= render :partial => 'comments/form', :locals => {:comment => @comment, :task => @task, :project => @project } %>
+<%= link_to 'Back to task', project_task_path(@project, @task) %> 

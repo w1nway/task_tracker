@@ -32,6 +32,6 @@ class TaskPolicy < ApplicationPolicy
   private
 
   def is_a_member?
-    user.present? && ProjectMembership.find_by(user: user).present?
+    user.present? && ProjectMembership.find_by(project: record.project, user: user).present? 
   end
 end
