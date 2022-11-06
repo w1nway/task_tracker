@@ -31,5 +31,11 @@ jobs:
       - name: Run rubocop
         run: bin/rubocop
 
+      - name: Run slim-lint
+        run: bin/slim-lint app/views
+
+      - name: Run scss-lint
+        run: bin/scss-lint app/assets/stylesheets
+
       - name: Setup database
         run: bin/rails db:setup
