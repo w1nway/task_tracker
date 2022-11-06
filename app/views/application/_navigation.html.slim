@@ -1,0 +1,30 @@
+nav.navbar.navbar-expand-lg.bg-light.mb-3
+  .container-fluid
+    = link_to 'TaskTracker', root_path, class: 'navbar-brand'
+
+    button.navbar-toggler[
+        type='button'
+        data-bs-toggle='collapse'
+        data-bs-target='#navbarNav'
+        aria-controls='navbarNav'
+        aria-expanded='false'
+        aria-label='Toggle navigation']
+
+      span.navbar-toggler-icon
+
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.ms-auto
+        - if current_user.present?
+          li.nav-item
+            = link_to sessions_path, class: 'nav-link' do
+              = [current_user.first_name, current_user.last_name].compact.join(' ').presence || current_user.email
+
+          li.nav-item
+            = link_to 'Log out', sessions_path, method: :delete, class: 'nav-link'
+
+        - else
+          li.nav-item
+            = link_to 'Sign in', new_sessions_path, class: 'nav-link'
+
+          li.nav-item
+            = link_to 'Sign up', new_user_path, class: 'nav-link'
