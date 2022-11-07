@@ -1,7 +1,5 @@
-
 .container-md
   .card
-
     .card-body
       h1.card-title.text-center = @project.name 
       p.card-text = @project.description
@@ -10,4 +8,3 @@
         = link_to 'Tasks', project_tasks_path(@project), class: "btn btn-primary ms-1"
         = link_to 'Projects', projects_path, class: "btn btn-primary ms-1"
         = link_to 'Edit', edit_project_path(@project), class: "btn btn-success ms-1"
-
