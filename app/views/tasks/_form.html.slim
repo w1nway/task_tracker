@@ -1,0 +1,27 @@
+= form_with(model: task, url: [project, task]) do |form|
+  - if task.errors.any?
+    .alert.label-list
+      h3
+        => pluralize(task.errors.count, "error")
+        | prohibited this task from being saved:
+    - task.errors.each do |error|
+      .errors
+        .alert.alert-danger
+          = error.full_message
+
+  .form-fields
+    .mb-3
+      = form.label :title, class: 'form-label'
+      = form.text_field :title, class: 'form-control'
+
+    .mb-3
+      = form.label :description, class: 'form-label'
+      = form.text_area :description, class: 'form-control'
+
+    .mb-3
+      = form.label :deadline_at, class: 'form-label'
+      .datetime-select
+        = form.datetime_select :deadline_at
+
+  .mb-3
+    = form.submit class: 'btn btn-primary'
