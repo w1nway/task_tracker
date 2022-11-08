@@ -5,31 +5,26 @@ div.card.task-card
     strong
       ' Title:
       = @task.title
-    => link_to 'Edit', edit_project_task_path(@project, @task), class: "btn btn-primary"
+    = link_to 'Edit', edit_project_task_path(@project, @task), class: "btn btn-primary"
 
   div.content
     ul.list-group.list-group-flush
-
       li.list-group-item
-
         strong
           ' Description:
         = @task.description
 
       li.list-group-item
-
         strong
           ' Deadline at:
         = @task.deadline_at
 
       li.list-group-item
-
         strong
           ' Project name:
         = @project.name
 
       li.list-group-item
-
         strong
           ' Requested at:
         = @task.created_at

@@ -1,9 +1,9 @@
 // Style variables
-@import 'variables';
+@import 'base/variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
 // Custom styles
-@import 'projects';
-@import 'tasks';
+@import 'custom/projects';
+@import 'custom/tasks';

@@ -2,8 +2,8 @@
   - if project.errors.any?
     #error_explanation.no
       h2
-      => pluralize(project.errors.count, "error")
-      | prohibited this project from being saved:
+        => pluralize(project.errors.count, "error")
+        | prohibited this project from being saved:
 
       ul
         - project.errors.each do |error|

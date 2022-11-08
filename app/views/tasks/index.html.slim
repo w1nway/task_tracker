@@ -1,37 +1,31 @@
 = link_to "Project", @project, class: "link-dark"
-h1
-  | Tasks
+
+h1 Tasks
+
 table.table.table-dark.table-hover
   thead
     tr
-      th
-        | Title
-      th
-        | Description
-      th
-        | Requested at
-      th
-        | Deadline until
-      th
-        | Project ID
+      th Title
+      th Description
+      th Requested at
+      th Deadline until
+      th Project ID
       th[colspan="2"]
   tbody
     - @tasks.each do |task|
       tr
         td
           = link_to task.title, url_for([@project, task]), class: "link-light"
-        td
-          = task.description
-        td
-          = task.created_at
-        td
-          = task.deadline_at
-        td
-          = task.project.name
+        td = task.description
+        td = task.created_at
+        td = task.deadline_at
+        td = task.project.name
         td
           = link_to 'Edit', edit_project_task_path(@project, task), class: "link-light"
         td
           = link_to 'Destroy', url_for([@project, task]),
            method: :delete, data: { confirm: 'Are you sure?' }, class: "link-light"
+
 br
+
 = link_to 'New task', new_project_task_path(@project), class: "link-dark"
