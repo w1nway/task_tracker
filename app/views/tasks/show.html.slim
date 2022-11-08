@@ -1,11 +1,10 @@
-
-= link_to 'Back', project_tasks_path(@project), class: "btn btn-primary btn-margin" 
+= link_to 'Back', project_tasks_path(@project), class: "btn btn-primary btn-margin"
 
 div.card.task-card
   .card-header.task-header
-    strong 
-      ' Title: 
-      = @task.title 
+    strong
+      ' Title:
+      = @task.title
     => link_to 'Edit', edit_project_task_path(@project, @task), class: "btn btn-primary"
 
   div.content
@@ -13,28 +12,27 @@ div.card.task-card
 
       li.list-group-item
 
-        strong 
-          ' Description: 
-        = @task.description 
+        strong
+          ' Description:
+        = @task.description
 
       li.list-group-item
 
-        strong 
+        strong
           ' Deadline at:
-        = @task.deadline_at 
+        = @task.deadline_at
 
       li.list-group-item
 
-        strong 
+        strong
           ' Project name:
-        = @project.name 
+        = @project.name
 
       li.list-group-item
 
-        strong 
-          ' Requested at: 
-        = @task.created_at 
+        strong
+          ' Requested at:
+        = @task.created_at
 
-= render 'comments/form', comment: @comment, task: @task, project: @project 
-= render 'comments/list', comments: @comments 
-
+= render 'comments/form', comment: @comment, task: @task, project: @project
+= render 'comments/list', comments: @comments
