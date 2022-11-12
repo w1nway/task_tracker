@@ -1,0 +1,3 @@
+= render 'form', comment: @comment, task: @task, project: @project
+.p-1
+  = link_to 'Back', project_task_path(@project, @task), class: 'btn btn-primary'
