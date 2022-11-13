@@ -37,18 +37,41 @@ class ProjectsController < ApplicationController
   end
 
   # PATCH/PUT /projects/1
+  # def update
+  #   if @project.update(project_params)
+  #     redirect_to @project, notice: "Project was successfully updated."
+  #   else
+  #     render :edit
+  #   end
+  # end
+
   def update
-    if @project.update(project_params)
+    result = Project::Update.call(project_params)
+
+    if result.success?
+      ProjectMailer.with(user:).project_updated.deliver_later
       redirect_to @project, notice: "Project was successfully updated."
     else
       render :edit
     end
   end
 
+
   # DELETE /projects/1
+  # def destroy
+  #   @project.destroy
+  #   redirect_to projects_path, notice: "Project was successfully destroyed."
+  # end
+
   def destroy
-    @project.destroy
-    redirect_to projects_path, notice: "Project was successfully destroyed."
+    result = Project::Destroy.call
+
+    if result.success?
+      ProjectMailer.with(user: current_user).project_destroyed.deliver_later
+      redirect_to projects_path, notice: "Project was successfully destroyed."
+    else
+      flash.now[:alert] = "Something went wrong. Try again."
+    end
   end
 
   private
