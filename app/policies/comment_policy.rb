@@ -18,7 +18,7 @@ class CommentPolicy < ApplicationPolicy
   private 
 
   def member?
-    ProjectMembership.find_by(project: record.task.project, user: user).present?
+    ProjectMembership.where(project: record.task.project, user: user).exists?
   end
 
 end

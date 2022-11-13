@@ -22,10 +22,10 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && (record.project_memberships.find_by(user: user).role = 'member' || record.project_memberships.find_by(user: user).role = 'owner')
+    user.present? && ProjectMembership.find_by(project: record, user: user).present?
   end
 
   def destroy?
-    user.present? && record.project_memberships.find_by(user: user).role == 'owner'
+    user.present? && record.project_memberships.find_by(user: user, role: :owner).present?
   end
 end
