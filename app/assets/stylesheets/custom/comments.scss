@@ -1,0 +1,49 @@
+.alert.label-list {
+  color: $dark-red;
+  margin-bottom: 0;
+}
+
+.errors {
+  max-width: 24em;
+}
+
+.form-fields {
+  max-width: 50%;
+
+  .datetime-select select {
+    border-radius: .375rem;
+    background-color: $white;
+    padding: .5rem;
+    max-width: max-content;
+
+    &:focus {
+      background-color: $input-bg;
+      border-color: $light-blue;
+      outline: 0;
+      box-shadow: 0 0 0 .25rem $dark-blue;
+    }
+  }
+}
+
+.task-card {
+  width: 24rem;
+}
+
+.content {
+  margin: 1rem;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-margin {
+  margin-bottom: 1rem;
+}
+
+.comments-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
