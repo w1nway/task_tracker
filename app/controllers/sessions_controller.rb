@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :authenticate_current_user!, only: %i[show]
+  before_action :authenticate_current_user!, only: %i[show destroy]
   before_action -> { authorize! User, with: SessionPolicy }
 
   def show
@@ -24,12 +24,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if current_user.present?
-      session.delete(:current_user_id)
-      redirect_to root_path, notice: "Successfully logged out"
-    else
-      redirect_to new_sessions_path, notice: "You can't log out unless you are authenticated"
-    end
+    session.delete(:current_user_id)
+    redirect_to root_path, notice: "Successfully logged out"
   end
 
   private

@@ -6,10 +6,10 @@ class CommentsController < ApplicationController
   before_action -> { authorize! @comment }, only: %i[edit update destroy]
 
   def create
-    @comment = Comment.new(comment_params.merge({ task: @task, user: current_user }))
-    authorize! @comment
+    authorize! Comment.new(task: @task)
 
-    if @comment.save
+    @comment = create_comment.comment
+    if create_comment.success?
       redirect_to project_task_path(@project, @task), notice: "Comment was successfully created!"
     else
       flash.now[:notice] = "Something went wrong. Try again."
@@ -18,15 +18,20 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
-    redirect_to project_task_path(@project, @task), notice: "Comment was successfully destroyed."
+    if destroy_comment.success?
+      redirect_to project_task_path(@project, @task), notice: "Comment was successfully destroyed."
+    else
+      flash.now[:notice] = "Something went wrong. Try again."
+      render "tasks/show"
+    end
   end
 
   def edit
   end
 
   def update
-    if @comment.update(comment_params)
+    @comment = update_comment.comment
+    if update_comment.success?
       redirect_to project_task_path(@project, @task),
                   notice: "Comment was successfully updated."
     else
@@ -36,6 +41,21 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def create_comment
+    @create_comment ||=
+      Comments::Create.call(comment_params: comment_params, user: current_user, task: @task)
+  end
+
+  def update_comment
+    @update_comment ||=
+      Comments::Update.call(comment: @comment, comment_params: comment_params)
+  end
+
+  def destroy_comment
+    @destroy_comment ||=
+      Comments::Destroy.call(comment: @comment)
+  end
 
   def set_comment
     @comment = Comment.find(params[:id])
