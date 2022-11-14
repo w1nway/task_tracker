@@ -1,15 +1,15 @@
-module Projects
+module Tasks
   class Update
     include Interactor
 
-    delegate :project_params, to: :context
+    delegate :task_params, to: :context
 
     def call
       context.update
-      context.fail!(error: "Error") unless project.update
+      context.fail!(error: "Error") unless task.update
 
       if context.success?
-        ProjectMailer.with(user: current_user).project_updated.deliver_later
+        ProjectMailer.with(user: current_user).task_destroyed.deliver_later
       end
     end
 

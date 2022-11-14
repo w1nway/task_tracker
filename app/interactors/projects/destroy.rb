@@ -6,8 +6,11 @@ module Projects
 
     def call
       context.destroy
-
       context.fail!(error: "Error") unless project.destroy
+
+      if context.success?
+        ProjectMailer.with(user: current_user).project_destroyed.deliver_later
+      end
     end
 
     private 

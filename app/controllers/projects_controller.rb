@@ -46,10 +46,9 @@ class ProjectsController < ApplicationController
   # end
 
   def update
-    result = Project::Update.call(project_params)
+    result = Projects::Update.call(project_params)
 
     if result.success?
-      ProjectMailer.with(user:).project_updated.deliver_later
       redirect_to @project, notice: "Project was successfully updated."
     else
       render :edit
@@ -64,13 +63,13 @@ class ProjectsController < ApplicationController
   # end
 
   def destroy
-    result = Project::Destroy.call
+    result = Projects::Destroy.call
 
     if result.success?
-      ProjectMailer.with(user: current_user).project_destroyed.deliver_later
       redirect_to projects_path, notice: "Project was successfully destroyed."
     else
       flash.now[:alert] = "Something went wrong. Try again."
+      render :index 
     end
   end
 
