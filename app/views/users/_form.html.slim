@@ -1,14 +1,13 @@
 = form_with(model: user) do |form|
   - if user.errors.any?
-    #error_explanation.no
+    .alert.label-list
       h2
-        => pluralize(user.errors.count, "error")
+        = pluralize(user.errors.count, "error")
         | prohibited this user from being saved:
-
-      ul
-        - user.errors.each do |error|
-          li
-            = error.full_message
+    - user.errors.each do |error|
+      .errors
+        .alert.alert-danger
+          = error.full_message
 
   .mb-3
     = form.label :first_name, class: 'form-label'
