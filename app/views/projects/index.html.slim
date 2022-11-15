@@ -4,7 +4,7 @@
 
     = link_to 'New Project', new_project_path, class: 'btn btn-primary'
 
-  table.table.table-striped
+  table.table.table-dark.table-hover.table-striped
     thead
       tr
         th = link_to 'Name', sort: 'name'
@@ -15,13 +15,14 @@
     tbody
       -@projects.each do |project|
         tr
-          td = link_to project.name, project
+          td = link_to project.name, project, class: "link-light"
           td = truncate(project.description, length: 50)
           td
             => time_ago_in_words(project.created_at)
             | ago
-          td = link_to 'Edit', edit_project_path(project)
-          td = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
-          td = link_to 'Tasks', project_tasks_path(project)
+          td = link_to 'Tasks', project_tasks_path(project), class: "btn btn-primary ms-1"
+          td = link_to 'Edit', edit_project_path(project), class: "btn btn-success ms-1"
+          td = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' },
+                  class: "btn btn-danger ms-1"
 
   = paginate @projects

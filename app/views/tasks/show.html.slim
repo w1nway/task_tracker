@@ -1,33 +1,31 @@
-= link_to 'Back', project_tasks_path(@project), class: "btn btn-primary btn-margin"
+.container-md
+  .card
+    .card-body
+      h1 = @task.title
 
-div.card.task-card
-  .card-header.task-header
-    strong
-      ' Title:
-      = @task.title
-    = link_to 'Edit', edit_project_task_path(@project, @task), class: "btn btn-primary"
-
-  div.content
-    ul.list-group.list-group-flush
-      li.list-group-item
+      p.card-text
         strong
           ' Description:
         = @task.description
 
-      li.list-group-item
-        strong
-          ' Deadline at:
-        = @task.deadline_at
-
-      li.list-group-item
+      p.card-text
         strong
           ' Project name:
         = @project.name
 
-      li.list-group-item
+      p.card-text
         strong
-          ' Requested at:
+          ' Created at:
         = @task.created_at
+
+      p.card-text
+        strong
+          ' Deadline at:
+        = @task.deadline_at
+
+    div.p-l-3.p-2
+      = link_to 'Edit', edit_project_task_path(@project, @task), class: "btn btn-success ms-1"
+      = link_to 'Back', project_tasks_path(@project), class: "btn btn-secondary ms-1"
 
 = render 'comments/form', comment: @comment, task: @task, project: @project
 = render 'comments/list', comments: @comments

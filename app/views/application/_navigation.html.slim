@@ -1,6 +1,6 @@
-nav.navbar.navbar-expand-lg.bg-light.mb-3
+nav.navbar.navbar-expand-lg.bg-dark.mb-3
   .container-fluid
-    = link_to 'TaskTracker', root_path, class: 'navbar-brand'
+    = link_to 'TaskTracker', root_path, class: 'navbar-brand link-light'
 
     button.navbar-toggler[
         type='button'
@@ -16,15 +16,15 @@ nav.navbar.navbar-expand-lg.bg-light.mb-3
       ul.navbar-nav.ms-auto
         - if current_user.present?
           li.nav-item
-            = link_to sessions_path, class: 'nav-link' do
+            = link_to sessions_path, class: 'nav-link link-light' do
               = [current_user.first_name, current_user.last_name].compact.join(' ').presence || current_user.email
 
           li.nav-item
-            = link_to 'Log out', sessions_path, method: :delete, class: 'nav-link'
+            = link_to 'Log out', sessions_path, method: :delete, class: 'nav-link link-light'
 
         - else
           li.nav-item
-            = link_to 'Sign in', new_sessions_path, class: 'nav-link'
+            = link_to 'Log in', new_sessions_path, class: 'nav-link  link-light'
 
           li.nav-item
-            = link_to 'Sign up', new_user_path, class: 'nav-link'
+            = link_to 'Sign up', new_user_path, class: 'nav-link  link-light'

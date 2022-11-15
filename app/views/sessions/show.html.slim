@@ -1,0 +1,19 @@
+.container-md
+  .card
+    .card-body
+      h1 Your Profile Info
+
+      p.card-text
+        strong
+          ' First Name:
+        = current_user.first_name
+
+      p.card-text
+        strong
+          ' Last Name:
+        = current_user.last_name
+
+      p.card-text
+        strong
+          ' Email:
+        = current_user.email

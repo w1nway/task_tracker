@@ -1,18 +1,17 @@
-h1 Comments
+.container-md
+  .card
+    div.p-l-3.p-3
+      h1 Comments
+    - comments.each do |comment|
+      .card-body
+        strong.card-text = comment.content
+        p.card-text
+          ' creator ~
+          = comment.user.email
+        p.card-text = comment.created_at
 
-.form-fields
-  - comments.each do |comment|
-    .list-group
-      .list-group-item.comments-list
-        .ms-2.me-auto
-          .fw-bold
-            ' User#
-            = comment.user_id
-          .fw-normal = comment.content
-          .fw-light = comment.created_at
-          .hstack.gap-2
-            = link_to 'Edit',
-            edit_project_task_comment_path(comment.task.project, comment.task, comment),
-            class: 'btn btn-success'
-            = link_to 'Destroy', project_task_comment_path(comment.task.project, comment.task, comment),
-              method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary'
+      div.p-l-3.p-2
+        = link_to 'Edit', edit_project_task_comment_path(comment.task.project, comment.task, comment),
+                class: "btn btn-success ms-1"
+        = link_to 'Destroy', project_task_comment_path(comment.task.project, comment.task, comment),
+                method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger ms-1'
