@@ -1,10 +1,10 @@
 require "rails_helper"
 
 describe Projects::Destroy::SendNotification do
-  include ActiveJob::TestHelper 
+  include ActiveJob::TestHelper
 
-  describe ".call" do 
-    context "with correct params" do 
+  describe ".call" do
+    context "with correct params" do
       let(:interactor) { described_class.new(project: project) }
       let(:project) { create :project }
 
@@ -14,7 +14,7 @@ describe Projects::Destroy::SendNotification do
 
       after do
         clear_enqueued_jobs
-      end 
+      end
 
       it "sends mail" do
         expect(ProjectMailer).to receive(:project_destroyed)

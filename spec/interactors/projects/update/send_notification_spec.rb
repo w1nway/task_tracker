@@ -4,19 +4,19 @@ describe Projects::Update::SendNotification do
   include ActiveJob::TestHelper
 
   describe ".call" do
-    context "with correct params" do 
+    context "with correct params" do
       let(:interactor) { described_class.new(project: project) }
       let(:project) { create :project }
 
-      before do 
+      before do
         allow(ProjectMailer).to receive(:project_updated).and_call_original
       end
 
-      after do 
+      after do
         clear_enqueued_jobs
-      end 
-      
-      it "sends mail" do 
+      end
+
+      it "sends mail" do
         expect(ProjectMailer).to receive(:project_updated)
 
         expect { interactor.run }.to change(enqueued_jobs, :size).by(1)
@@ -24,4 +24,3 @@ describe Projects::Update::SendNotification do
     end
   end
 end
-
