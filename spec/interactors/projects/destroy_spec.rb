@@ -9,12 +9,6 @@ describe Projects::Destroy::Execute do
       it { expect { interactor.run }.to change(Project, :count).by(-1) }
     end
 
-    # context "when project is nil instance" do
-    #   let(:project) { Project = nil }
-
-    #   it { expect { interactor.run }.to be_an_instance_of NilClass }
-    # end
-
     context "when project destroyed in interactor" do
       let(:expected_error_message) { "Invalid Data" }
 
