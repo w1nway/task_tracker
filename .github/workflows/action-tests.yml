@@ -39,3 +39,6 @@ jobs:
 
       - name: Setup database
         run: bin/rails db:setup
+
+      - name: Check test
+        run: bin/rspec
