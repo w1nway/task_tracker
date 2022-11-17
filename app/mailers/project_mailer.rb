@@ -6,13 +6,13 @@ class ProjectMailer < ApplicationMailer
   end
 
   def project_updated(project, user)
-    @project.update(project_params)
+    @project = project
 
     mail(to: user.email)
   end
 
   def project_destroyed(project, user)
-    @project.destroy
+    @project = project
 
     mail(to: user.email)
   end

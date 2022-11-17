@@ -1,12 +1,12 @@
 module Projects
-  class Create
-    class PrepareParams
+  class Destroy
+    class Execute
       include Interactor
 
       delegate :project, to: :context
 
       def call
-        ProjectMailer.project_created(project, user).deliver_later
+        context.fail!(error: "Invalid data") unless project.destroy
       end
     end
   end

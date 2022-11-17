@@ -1,22 +1,8 @@
 module Projects
   class Destroy
-    include Interactor
+    include Interactor::Organizer
 
-    delegate :project_params, to: :context
-
-    def call
-      context.destroy
-      context.fail!(error: "Error") unless project.destroy
-
-      if context.success?
-        ProjectMailer.with(user: current_user).project_destroyed.deliver_later
-      end
-    end
-
-    private 
-
-    def destroy
-      @project.destroy
-    end
+    organize Projects::Destroy::Execute,
+             Projects::Destroy::SendNotification
   end
 end
