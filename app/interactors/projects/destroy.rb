@@ -1,13 +1,8 @@
 module Projects
   class Destroy
-    class Execute
-      include Interactor
+    include Interactor::Organizer
 
-      delegate :project, to: :context
-
-      def call
-        context.fail!(error: "Invalid Data") unless project.destroy
-      end
-    end
+    organize Projects::Destroy::Execute,
+             Projects::Destroy::SendNotification
   end
 end

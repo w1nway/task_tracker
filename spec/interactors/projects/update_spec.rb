@@ -1,11 +1,11 @@
 require "rails_helper"
 
-describe Projects::Destroy do
+describe Projects::Update do
   describe ".organized" do
     let(:expected_interactors) do
       [
-        Projects::Destroy::Execute,
-        Projects::Destroy::SendNotification
+        Projects::Update::Execute,
+        Projects::Update::SendNotification
       ]
     end
 
