@@ -1,4 +1,4 @@
-module Projects
+module Tasks
   class Update 
     include Interactor::Organizer
 
