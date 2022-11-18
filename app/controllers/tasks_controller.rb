@@ -17,20 +17,25 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params.merge({ project: @project }))
-    authorize! @task
+    @task = create_task.task
+    authorize! @task 
 
-    if @task.save
+    if create_task.success?
       redirect_to project_task_path(@project, @task), notice: "Task was successfully created!"
     else
       flash.now[:notice] = "Something went wrong. Try again."
       render :new
+      end
     end
   end
 
   def destroy
-    @task.destroy
-    redirect_to @project, notice: "Task was successfully destroyed."
+    if destroy_task.success?
+      redirect_to @project, notice: "Task was successfully destroyed."
+    else
+      flash.now[:alert] = "Something went wrong. Try again."
+      render :show
+    end
   end
 
   def show
@@ -42,7 +47,9 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(task_params)
+    @task = update_task.task
+    
+    if update_task.success?
       redirect_to project_task_path(@project, @task), notice: "Task was successfully updated."
     else
       flash.now[:notice] = "Something went wrong. Try again."
@@ -51,6 +58,20 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def create_task
+    @create_task ||=
+      Tasks::Create.call(task_params: task_params, project: @project, user: current_user)
+  end
+
+  def update_task
+    @update_task ||=
+      Tasks::Create.call(task_params: task_params, task: @task, project: @project, user: current_user)
+  end
+
+  def destroy_task
+    @destroy_task ||=
+      Tasks::Destroy.call(task: @task, project: @project, user: current_user)
 
   def set_task
     @task = Task.find(params[:id])
