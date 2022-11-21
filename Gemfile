@@ -6,6 +6,7 @@ ruby "3.0.4"
 gem "action_policy"
 gem "bcrypt", "~> 3.1.7"
 gem "enumerize"
+gem "graphql"
 gem "interactor"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
@@ -42,4 +43,5 @@ group :development do
   gem "web-console", ">= 4.1.0"
 end
 
+gem "graphiql-rails", group: :development
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
