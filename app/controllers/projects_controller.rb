@@ -44,11 +44,16 @@ class ProjectsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to @project, notice: "Project was successfully created." }
         format.json do
-          render json: { project: @project, errors: @errors }
+          render json: { project: @project, errors: @project.errors }
         end
       end
     else
-      render json: { project: @project, errors: @project.errors }
+      respond_to do |format|
+        format.html { render :new, notice: "Something went wrong. Try again" }
+        format.json do
+          render json: { project: {}, errors: @project.errors }
+        end
+      end
     end
   end
 
