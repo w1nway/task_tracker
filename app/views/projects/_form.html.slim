@@ -1,5 +1,4 @@
-= form_with(model: project, url: projects_path(project, format: :json)) do |form|
-  - if project.errors.any?
+= form_with(model: project) do |form|
     #error_explanation.no
       h2
         => pluralize(project.errors.count, "error")
