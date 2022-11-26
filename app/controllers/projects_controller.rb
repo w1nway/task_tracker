@@ -28,17 +28,27 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    respond_to do |format|
+      format.html { render :edit }
+      format.json do
+        render json: { project: @project }
+      end
+    end
   end
 
   # POST /projects
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @project = create_project.project
 
     if create_project.success?
-      redirect_to @project, notice: "Project was successfully created."
+      respond_to do |format|
+        format.html { redirect_to @project, notice: "Project was successfully created." }
+        format.json do
+          render json: { project: @project, errors: @errors }
+        end
+      end
     else
-      flash.now[:alert] = "Something went wrong. Try again."
-      render :new
+      render json: { project: @project, errors: @project.errors }
     end
   end
 
