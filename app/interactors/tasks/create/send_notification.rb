@@ -6,7 +6,8 @@ module Tasks
       delegate :project, :task, :user, to: :context
 
       def call 
-        TaskMailer.task_created(task, user).deliver_later
+        TaskMailer.owner_task_created(project, task).deliver_later
+        TaskMailer.member_task_created(project, task).deliver_later
       end
     end
   end

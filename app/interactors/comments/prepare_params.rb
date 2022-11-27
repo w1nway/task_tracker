@@ -6,8 +6,7 @@ module Comments
 
     def call 
       context.prepared_params = prepared_params
-
-      context.fail!(error: "Invalid data") unless context.prepared_params != prepared_params
+    end
 
       private 
 
