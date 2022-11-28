@@ -5,6 +5,5 @@ module Projects
     organize Projects::Save,
              Projects::Create::CreateOwner,
              Projects::Create::SendNotification
-
   end
 end

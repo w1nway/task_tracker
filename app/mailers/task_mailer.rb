@@ -2,54 +2,44 @@ class TaskMailer < ApplicationMailer
   def owner_task_created(project, task)
     @project = project
     @task = task
-    @owner = ProjectMembership.find_by(project: @project, role: :owner).user
 
-    mail(to: owner.email.pluck(:email))
+    mail(to: project.users.where(project_memberships: { role: :owner }).pluck(:email))
   end
 
   def member_task_created(project, task)
     @project = project
     @task = task
 
-    for user in project.users do
-      if user.role == 'member'
-        @member = user
-        mail(to: member.email.pluck(:email))
-      end
-    end
+    mail(to: project.users.where(project_memberships: { role: :member }).pluck(:email))
   end
 
   def task_updated(project, task)
-    @project = project 
+    @project = project
     @task = task
 
     mail(to: project.users.pluck(:email))
   end
 
-  def task_destroyed_by_user(project, task, user)
-    @project = project 
+  def task_destroyed_user(project, task, current_user)
+    @project = project
     @task = task
 
-    mail(to: user.email)
+    mail(to: current_user.email)
   end
 
-  def task_destroyed_by_owner(project, task)
-    @project = project 
-    @task = task 
-    @owner = ProjectMembership.find_by(project: @project, role: :owner).user
+  def task_destroyed_owner(project, task)
+    @project = project
+    @task = task
 
-    mail(to: owner.email.pluck(:email))
+    mail(to: project.users.where(project_memberships: { role: :owner }).pluck(:email))
   end
 
   def task_destroyed_notification(project, task, current_user)
     @project = project
     @task = task
-    
-    for user in project.users do
-      if user.role == 'member' && user != current_user
-        @member = user
-        mail(to: member.email.pluck(:email))
-      end
-    end
+
+    company = project.users.where(project_memberships: { role: :member }).where.not(id: current_user).pluck(:email)
+
+    mail(to: company)
   end
 end

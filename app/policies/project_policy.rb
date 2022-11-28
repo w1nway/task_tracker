@@ -29,10 +29,6 @@ class ProjectPolicy < ApplicationPolicy
     user.present? && owner?
   end
 
-  def is_authorized?
-    ProjectMembership.find_by(user: user).present?
-  end
-
   private
 
   def member?

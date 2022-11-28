@@ -1,5 +1,5 @@
-module Projects 
-  class Destroy 
+module Projects
+  class Destroy
     class SendNotification
       include Interactor
 

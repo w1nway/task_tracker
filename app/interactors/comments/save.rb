@@ -1,19 +1,19 @@
 module Comments
-  class Save 
+  class Save
     include Interactor
 
     delegate :prepared_params, to: :context
 
-    def call 
+    def call
       context.comment = comment
 
       context.fail!(error: "Invalid data") unless comment.save
+    end
 
-      private 
+    private
 
-      def comment
-        @comment ||= Comment.new(prepared_params)
-      end
+    def comment
+      @comment ||= Comment.new(prepared_params)
     end
   end
 end

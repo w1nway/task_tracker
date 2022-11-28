@@ -3,19 +3,13 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
   before_action :set_project
   before_action -> { authorize! @task }, only: %i[show edit update destroy]
-  before_action -> { authorize! @task, with: ProjectPolicy }, only: %i[create]
-
+  before_action -> { authorize! Task.new(project: @project) }, only: %i[index new create]
 
   def index
-    @task = Task.new(project: @project)
-    authorize! @task
-
     @tasks = @project.tasks
   end
 
   def new
-    @task = Task.new(project: @project)
-    authorize! @task
   end
 
   def create
@@ -26,7 +20,6 @@ class TasksController < ApplicationController
     else
       flash.now[:notice] = "Something went wrong. Try again."
       render :new
-      end
     end
   end
 
@@ -49,7 +42,7 @@ class TasksController < ApplicationController
 
   def update
     @task = update_task.task
-    
+
     if update_task.success?
       redirect_to project_task_path(@project, @task), notice: "Task was successfully updated."
     else
@@ -67,12 +60,13 @@ class TasksController < ApplicationController
 
   def update_task
     @update_task ||=
-      Tasks::Create.call(task_params: task_params, task: @task, project: @project, user: current_user)
+      Tasks::Update.call(task_params: task_params, task: @task, project: @project, user: current_user)
   end
 
   def destroy_task
     @destroy_task ||=
-      Tasks::Destroy.call(task: @task, project: @project, user: current_user)
+      Tasks::Destroy.call(task: @task, user: current_user)
+  end
 
   def set_task
     @task = Task.find(params[:id])

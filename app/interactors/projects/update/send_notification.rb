@@ -5,7 +5,7 @@ module Projects
 
       delegate :project, :user, to: :context
 
-      def call 
+      def call
         ProjectMailer.project_updated(project).deliver_later
       end
     end

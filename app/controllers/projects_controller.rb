@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
       redirect_to projects_path, notice: "Project was successfully destroyed."
     else
       flash.now[:alert] = "Something went wrong. Try again."
-      render :index 
+      render :index
     end
   end
 
@@ -71,6 +71,7 @@ class ProjectsController < ApplicationController
   def destroy_project
     @destroy_project ||=
       Projects::Destroy.call(project: @project)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_project

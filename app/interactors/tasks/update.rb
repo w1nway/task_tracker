@@ -1,8 +1,8 @@
 module Tasks
-  class Update 
+  class Update
     include Interactor::Organizer
 
     organize Tasks::Update::Execute
-             Tasks::Update::SendNotification
+    Tasks::Update::SendNotification
   end
 end

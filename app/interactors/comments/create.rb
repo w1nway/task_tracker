@@ -1,5 +1,5 @@
-module Comments 
-  class Create 
+module Comments
+  class Create
     include Interactor::Organizer
 
     organize Comments::PrepareParams,

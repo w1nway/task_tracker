@@ -6,11 +6,11 @@ class CommentsController < ApplicationController
   before_action -> { authorize! @comment }, only: %i[edit update destroy]
 
   def create
+    authorize! Comment.new(task: @task)
     @comment = create_comment.comment
-    authorize! @comment
 
     if create_comment.success?
-      redirect_to project_task_path(@project, @task), 
+      redirect_to project_task_path(@project, @task),
                   notice: "Comment was successfully created!"
     else
       flash.now[:notice] = "Something went wrong. Try again."
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
 
   def destroy
     if destroy_comment.success?
-      redirect_to project_task_path(@project, @task), 
+      redirect_to project_task_path(@project, @task),
                   notice: "Comment was successfully destroyed."
     else
       flash.now[:notice] = "Something went wrong. Try again."
@@ -57,7 +57,8 @@ class CommentsController < ApplicationController
 
   def destroy_comment
     @destroy_comment ||=
-      Comments::Destroy.call(task: @task, comment: @comment, user: current_user)
+      Comments::Destroy.call(comment: @comment, user: current_user)
+  end
 
   def set_comment
     @comment = Comment.find(params[:id])

@@ -4,16 +4,14 @@ module Tasks
 
     delegate :task_params, :project, to: :context
 
-    def call 
+    def call
       context.prepared_params = prepared_params
+    end
 
-      context.fail!(error: "Invalid data") unless context.prepared_params != prepared_params
+    private
 
-      private 
-
-      def prepared_params
-        task_params.merge({ project: project })
-      end
+    def prepared_params
+      task_params.merge({ project: project })
     end
   end
 end

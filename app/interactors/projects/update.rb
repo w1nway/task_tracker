@@ -3,7 +3,6 @@ module Projects
     include Interactor::Organizer
 
     organize Projects::Update::Execute
-             Projects::Update::SendNotification
+    Projects::Update::SendNotification
   end
 end
-    
