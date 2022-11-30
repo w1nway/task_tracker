@@ -6,16 +6,21 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = create_user.user 
 
-    if @user.save
+    if create_user.success?
       redirect_to root_path, notice: "You've successfully signed up!"
     else
-      render :new
+      render :new, notice: "Something went wrong. Try again"
     end
   end
 
   private
+
+  def create_user
+    @create_user ||=
+      Users::Create.call(user_params: user_params)
+  end
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password)
