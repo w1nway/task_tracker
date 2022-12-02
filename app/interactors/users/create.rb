@@ -7,7 +7,6 @@ module Users
     def call
       context.user = user
 
-      # context.fail!(error: "Invalid data") unless user.update(user_params)
       context.fail!(error: "Invalid data") unless user.save
     end
 
