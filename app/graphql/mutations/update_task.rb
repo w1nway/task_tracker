@@ -8,7 +8,7 @@ module Mutations
 
     def resolve(input:)
       task = Task.find_by(id: input.task_id)
-      result = Tasks::Update.call(task: task, task_params: input.to_h.except(:task_id), user: current_user)
+      result = Tasks::Update.call(task: task, task_params: input.to_h.except(:task_id))
 
       if result.success?
         result.to_h

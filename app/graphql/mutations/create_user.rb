@@ -7,7 +7,7 @@ module Mutations
     type Types::Payloads::CreateUserPayload
 
     def resolve(input:)
-      result = Users::Create.call(user_params: input.to_h, user: current_user)
+      result = Users::Create.call(user_params: input.to_h)
 
       if result.success?
         result.to_h
