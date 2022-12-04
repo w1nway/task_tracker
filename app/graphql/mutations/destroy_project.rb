@@ -8,7 +8,7 @@ module Mutations
 
     def resolve(input:)
       project = Project.find(input.id)
-      result = Projects::Destroy.call(project: project, project_params: input.to_h, user: current_user)
+      result = Projects::Destroy.call(project: project, user: current_user)
 
       if result.success?
         result.to_h
