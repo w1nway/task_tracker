@@ -5,7 +5,7 @@ module Mutations
     type Types::Payloads::SignUpPayload
 
     def resolve(input:)
-      result = Users::Save.call(user_params: input.to_h)
+      result = Users::Create.call(user_params: input.to_h)
 
       result.to_h.merge(errors: formatted_errors(result.user))
     end

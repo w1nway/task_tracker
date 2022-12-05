@@ -1,8 +1,8 @@
 module Users
-  class Authenticate
+  class Create
     include Interactor::Organizer
 
-    organize Users::CheckCredentials,
+    organize Users::Save,
              Users::GenerateAccessToken
   end
 end
