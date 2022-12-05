@@ -1,6 +1,6 @@
 module Mutations
   class UpdateProject < BaseMutation
-    include GraphqlErrors
+    include AuthenticableGraphqlUser
 
     argument :input, Types::Inputs::UpdateProjectInput
 
