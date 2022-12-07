@@ -4,7 +4,7 @@ describe Users::GenerateAccessToken do
   describe ".call" do
     user = User.create(
       id: 1,
-      email: "admin@admin.ru",
+      email: "user@admin.ru",
       password: "123456"
     )
 

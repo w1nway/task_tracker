@@ -6,7 +6,7 @@ describe Projects::Create::SendNotification do
   describe ".call" do
     context "with correct params" do
       let(:interactor) { described_class.new(project: project, user: user) }
-      let(:user) { create :user, first_name: "test", last_name: "test", email: "admin@admin.ru", role: "member" }
+      let(:user) { create :user, first_name: "test", last_name: "test", email: "adminka@admin.ru", role: "member" }
       let(:project) { create :project }
 
       before do

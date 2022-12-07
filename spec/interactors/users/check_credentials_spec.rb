@@ -6,7 +6,7 @@ describe Users::CheckCredentials do # rubocop:disable Metrics/BlockLength
       {
         first_name: "test",
         last_name: "test",
-        email: "admin@admin.ru",
+        email: "person@admin.ru",
         password: "123456"
       }
     end
@@ -16,7 +16,7 @@ describe Users::CheckCredentials do # rubocop:disable Metrics/BlockLength
         {
           first_name: "test",
           last_name: "test",
-          email: "admin@admin.ru",
+          email: "person@admin.ru",
           password: "123456"
         }
       end
@@ -37,8 +37,7 @@ describe Users::CheckCredentials do # rubocop:disable Metrics/BlockLength
       let(:wrong_credentials) do
         {
           first_name: "another first_name for test",
-          last_name: "test",
-          email: "admin@admin.ru"
+          last_name: "test"
         }
       end
 

@@ -6,7 +6,7 @@ describe Projects::Create::CreateOwner do
 
     context "when params are valid" do
       let(:project) { create :project }
-      let(:user) { create :user }
+      let(:user) { create :user, email: "email@email.ru" }
 
       it { expect { interactor.run }.to change(ProjectMembership, :count).by(1) }
     end
