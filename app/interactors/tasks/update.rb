@@ -1,13 +1,8 @@
 module Tasks
   class Update
-    class Execute
-      include Interactor
+    include Interactor::Organizer
 
-      delegate :task, :task_params, to: :context
-
-      def call
-        context.fail!(error: "Invalid Data") unless task.update(task_params)
-      end
-    end
+    organize Tasks::Update::Execute,
+             Tasks::Update::SendNotification
   end
 end
