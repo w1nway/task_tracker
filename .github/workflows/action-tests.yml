@@ -7,6 +7,7 @@ jobs:
     env:
       DATABASE_URL: postgres://postgres:postgres@localhost:5432
       RAILS_ENV: test
+      JWT_SECRET: AndreyAlmazRaphaelJoshuaRailya
 
     services:
       postgres:

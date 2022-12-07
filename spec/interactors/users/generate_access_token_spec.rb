@@ -3,7 +3,6 @@ require "rails_helper"
 describe Users::GenerateAccessToken do
   describe ".call" do
     user = User.create(
-      id: 1,
       email: "user@admin.ru",
       password: "123456"
     )
