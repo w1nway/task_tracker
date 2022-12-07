@@ -1,12 +1,12 @@
 require "rails_helper"
 
-describe Users::GenerateAccessToken do 
-  describe ".call" do 
-
+describe Users::GenerateAccessToken do
+  describe ".call" do
     user = User.create(
       id: 1,
       email: "admin@admin.ru",
-      password: "123456")
+      password: "123456"
+    )
 
     let!(:interactor) { described_class.new(user: user) }
 
@@ -17,10 +17,9 @@ describe Users::GenerateAccessToken do
     end
 
     context "when context contains the user" do
-
       let!(:interactor) { described_class.new(user: user) }
 
-      it "user present" do
+      it do
         interactor.run
 
         expect(interactor.context.user).present?
@@ -28,4 +27,3 @@ describe Users::GenerateAccessToken do
     end
   end
 end
-
