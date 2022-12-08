@@ -3,7 +3,7 @@ module Resolvers
     argument_class Types::BaseArgument
 
     def current_user
-      @context[:current_user]
+      context[:current_user]
     end
   end
 end

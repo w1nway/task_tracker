@@ -2,7 +2,7 @@ class GraphqlController < ApplicationController
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
-  # protect_from_forgery with: :null_session
+  protect_from_forgery with: :null_session
 
   skip_verify_authorized
 
@@ -47,5 +47,26 @@ class GraphqlController < ApplicationController
     logger.error e.backtrace.join("\n")
 
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
+  end
+
+  def current_user
+    return unless access_token.present?
+
+    User.find_by(id: payload["sub"])
+  end
+
+  def access_token
+    # Authorization: Bearer jie.123.ae
+    @access_token ||= request.headers["Authorization"]&.split&.last
+  end
+
+  def payload
+    ::JWT.decode(
+      access_token, jwt_secret, true, { algorithm: "HS256" }
+    ).first
+  end
+
+  def jwt_secret
+    ENV.fetch("JWT_SECRET")
   end
 end
