@@ -1,6 +1,6 @@
 module Mutations
   class UpdateTask < BaseMutation
-    include GraphqlErrors
+    include AuthenticableGraphqlUser
 
     argument :input, Types::Inputs::UpdateTaskInput, required: true
 

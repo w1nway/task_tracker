@@ -1,6 +1,6 @@
 module Mutations
   class CreateUser < BaseMutation
-    include GraphqlErrors
+    include AuthenticableGraphqlUser
 
     argument :input, Types::Inputs::CreateUserInput, required: true
 
