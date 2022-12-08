@@ -1,5 +1,6 @@
 module Mutations
   class DestroyProject < BaseMutation
+    include AuthenticableGraphqlUser
     include GraphqlErrors
 
     argument :input, Types::Inputs::DestroyProjectInput, required: true
