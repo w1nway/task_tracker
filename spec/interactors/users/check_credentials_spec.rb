@@ -22,11 +22,10 @@ describe Users::CheckCredentials do # rubocop:disable Metrics/BlockLength
       end
 
       let!(:interactor) do
-        described_class
-          .new(credentials: spec_credentials)
+        described_class.new(credentials: spec_credentials)
       end
 
-      it "and user params equals to context.credentials" do
+      it "and the user matches them" do
         interactor.run
 
         expect(interactor.context.credentials).to eq(user)
