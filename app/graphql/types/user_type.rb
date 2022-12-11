@@ -6,6 +6,6 @@ module Types
     field :email, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :user_role, UserRoleEnum, null: false
+    field :role, UserRoleEnum, null: false
   end
 end
