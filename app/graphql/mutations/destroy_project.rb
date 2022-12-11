@@ -9,12 +9,7 @@ module Mutations
     def resolve(input:)
       project = Project.find(input.id)
       result = Projects::Destroy.call(project: project)
-
-      if result.success?
-        result.to_h
-      else
-        result.to_h.merge(errors: formatted_errors(result.project))
-      end
+      result.to_h
     end
   end
 end
