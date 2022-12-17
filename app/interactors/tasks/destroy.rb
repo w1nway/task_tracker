@@ -1,13 +1,8 @@
 module Tasks
   class Destroy
-    class Execute
-      include Interactor
+    include Interactor::Organizer
 
-      delegate :task, to: :context
-
-      def call
-        context.fail!(error: "Invalid Data") unless task.destroy
-      end
-    end
+    organize Tasks::Destroy::Execute,
+             Tasks::Destroy::SendNotification
   end
 end

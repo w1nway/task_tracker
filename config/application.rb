@@ -33,6 +33,10 @@ module TaskTracker
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
+    if ['development', 'test'].include? ENV['RAILS_ENV']
+      Dotenv::Railtie.load
+    end
+
     config.generators.system_tests = nil
 
     config.active_job.queue_adapter = :sidekiq
