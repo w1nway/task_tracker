@@ -29,6 +29,14 @@ module Api
         end
       end
 
+      def destroy 
+        if destroy_project.success?
+          render json: { project: @project, errors: @project.errors }
+        else
+          render json: { project: {}, errors: @project.errors }
+        end
+      end
+
       private
 
       def create_project
@@ -39,6 +47,11 @@ module Api
       def update_project
         @update_project ||=
           Projects::Update.call(project_params: project_params, project: @project)
+      end
+
+      def destroy_project
+        @destroy_project ||=
+          Projects::Destroy.call(project: @project)
       end
 
       # Only allow a list of trusted parameters through.
