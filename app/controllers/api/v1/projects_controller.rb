@@ -19,11 +19,26 @@ module Api
         end
       end
 
+      def update 
+        @project = update_project.project
+        
+        if update_project.success?
+          render json: { project: @project, errors: @project.errors }
+        else
+          render json: { project: {}, errors: @project.errors }
+        end
+      end
+
       private
 
       def create_project
         @create_project ||=
           Projects::Create.call(project_params: project_params, user: current_user)
+      end
+
+      def update_project
+        @update_project ||=
+          Projects::Update.call(project_params: project_params, project: @project)
       end
 
       # Only allow a list of trusted parameters through.
