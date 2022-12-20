@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -16,6 +15,23 @@
         <p><%=msg%></p>
       </div>
     <%end%>
-    <%= yield %>
+
+    <nav>
+      <% if current_user.present? %>
+        <% if !current_user.first_name.present? && !current_user.last_name.present?%>
+          <p> Email: <%= "#{current_user.email}" %></p>
+        <% else %>
+          <p> First name: <%= "#{current_user.first_name}" %> | Last name: <%= "#{current_user.last_name}" %></p>
+        <% end %>
+
+        <p><%= link_to "Log Out", sessions_path, method: :delete %></p>
+
+      <% else %>
+        <h4> Welcome guest! </h4>
+        <p> To use our application you must sign up and log in. </p>
+        <p><%= link_to "Sign Up", new_user_path %> | <%= link_to "Log in", new_sessions_path %></p>
+      <% end %>
+      <%= yield %>
+    </nav>
   </body>
 </html>
