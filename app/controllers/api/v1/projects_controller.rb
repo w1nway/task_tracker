@@ -19,9 +19,9 @@ module Api
         end
       end
 
-      def update 
+      def update
         @project = update_project.project
-        
+
         if update_project.success?
           render json: { project: @project, errors: @project.errors }
         else
@@ -29,7 +29,7 @@ module Api
         end
       end
 
-      def destroy 
+      def destroy
         if destroy_project.success?
           render json: { project: @project, errors: @project.errors }
         else

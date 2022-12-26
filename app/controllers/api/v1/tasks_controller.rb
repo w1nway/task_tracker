@@ -1,5 +1,5 @@
-module Api 
-  module V1 
+module Api
+  module V1
     class TasksController < Api::ApplicationController
       before_action :set_project
 
@@ -17,9 +17,9 @@ module Api
         end
       end
 
-      def update 
+      def update
         @task = update_task.task
-        
+
         if update_task.success?
           render json: { task: @task, errors: @task.errors }
         else
@@ -27,7 +27,7 @@ module Api
         end
       end
 
-      def destroy 
+      def destroy
         if destroy_task.success?
           render json: { task: @task, errors: @task.errors }
         else
@@ -35,16 +35,16 @@ module Api
         end
       end
 
-      private 
+      private
 
       def create_task
         @create_task ||= Tasks::Create.call(task_params: task_params, project: @project)
       end
-    
+
       def update_task
         @update_task ||= Tasks::Update.call(task_params: task_params, task: @task)
       end
-    
+
       def destroy_task
         @destroy_task ||= Tasks::Destroy.call(task: @task, user: current_user)
       end
