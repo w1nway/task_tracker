@@ -3,7 +3,6 @@ module Projects
     include Interactor::Organizer
 
     organize Projects::Save,
-             Projects::Create::CreateOwner,
-             Projects::Create::SendNotification
+             Projects::Create::CreateOwner
   end
 end

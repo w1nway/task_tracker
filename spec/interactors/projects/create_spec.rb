@@ -5,8 +5,7 @@ describe Projects::Create do
     let(:expected_interactors) do
       [
         Projects::Save,
-        Projects::Create::CreateOwner,
-        Projects::Create::SendNotification
+        Projects::Create::CreateOwner
       ]
     end
 

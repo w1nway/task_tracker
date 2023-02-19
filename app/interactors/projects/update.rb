@@ -2,7 +2,6 @@ module Projects
   class Update
     include Interactor::Organizer
 
-    organize Projects::Update::Execute,
-             Projects::Update::SendNotification
+    organize Projects::Update::Execute
   end
 end
