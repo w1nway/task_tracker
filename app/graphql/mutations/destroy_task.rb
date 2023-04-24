@@ -8,10 +8,7 @@ module Mutations
 
     def resolve(input:)
       task = Task.find(input.id)
-
-      result = Tasks::Destroy.call(task: task).to_h
-
-      result.to_h.merge(errors: formatted_errors(result.task))
+      Tasks::Destroy.call(task: task).to_h
     end
   end
 end
