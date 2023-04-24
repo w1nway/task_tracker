@@ -8,10 +8,7 @@ module Mutations
 
     def resolve(input:)
       comment = Comment.find(input.id)
-
-      result = Comment::Destroy.call(comment: comment).to_h
-
-      result.to_h.merge(errors: formatted_errors(result.comment))
+      Comment::Destroy.call(comment: comment).to_h
     end
   end
 end
