@@ -14,6 +14,7 @@ module Types
 
     field :create_comment, mutation: Mutations::CreateComment
     field :update_comment, mutation: Mutations::UpdateComment
+    field :destroy_comment, mutation: Mutations::DestroyComment
 
     field :update_user, mutation: Mutations::UpdateUser
     field :destroy_user, mutation: Mutations::DestroyUser
